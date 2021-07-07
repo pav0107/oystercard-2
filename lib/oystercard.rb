@@ -1,3 +1,5 @@
+require_relative './lib/journey.rb'
+
 class Oystercard
   CARD_LIMIT = 90
   CARD_MINIMUM = 1  
@@ -22,7 +24,7 @@ class Oystercard
   def touch_out(station)
     deduct(1)
     @exit_station = station
-    journey_history.push( { entry_station: entry_station, exit_station: exit_station})
+    journey_history << { entry_station: entry_station, exit_station: exit_station}
     @entry_station = nil 
   end
 
