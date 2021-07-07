@@ -41,17 +41,17 @@ describe Journey do
     it 'sets fare to £1 for a completed journey' do
       subject.start(entry_station)
       subject.finish(exit_station)
-      expect(subject.fare).to eq(1)
+      expect(subject.fare).to eq(Journey::MIN_FARE)
     end
 
     it 'sets charge to £6 if exit station but no entry station' do
       subject.finish(exit_station)
-      expect(subject.fare).to eq(6)
+      expect(subject.fare).to eq(Journey::PENALTY_FARE)
     end
 
     it 'sets charge to £6 if entry station but no exit station' do
       subject.start(entry_station)
-      expect(subject.fare).to eq(6)
+      expect(subject.fare).to eq(Journey::PENALTY_FARE)
     end
   end
 
