@@ -27,8 +27,32 @@ describe Journey do
   describe 'the journey' do
     it 'is in journey' do
       subject.start(entry_station)
-      expect(subject.in_journey?).to eq(true)
+      expect(subject.complete?).to eq(false)
     end
 
+    it 'has completed the journey' do
+      subject.start(entry_station)
+      subject.finish(exit_station)
+      expect(subject.complete?).to eq(true)
+    end
   end
+
+  describe 'the cost of the journey' do
+    it 'sets fare to £1 for a completed journey' do
+      subject.start(entry_station)
+      subject.finish(exit_station)
+      expect(subject.fare).to eq(1)
+    end
+
+    it 'sets charge to £6 if exit station but no entry station' do
+      subject.finish(exit_station)
+      expect(subject.fare).to eq(6)
+    end
+
+    it 'sets charge to £6 if entry station but no exit station' do
+      subject.start(entry_station)
+      expect(subject.fare).to eq(6)
+    end
+  end
+
 end

@@ -15,7 +15,13 @@ class Journey
     @exit_station = exit_station
   end
 
-  def in_journey?
-    @entry_station && !@exit_station
+  def complete?
+    !!@entry_station && !!@exit_station
+  end
+
+  def fare
+    return 1 if complete?
+    return 6 if !@entry_station && !!@exit_station
+    return 6 if !@exit_station && !!@entry_station
   end
 end
