@@ -43,24 +43,12 @@ describe Oystercard do
       expect {subject.touch_in(station)}.to raise_error "minimum balance is #{Oystercard::CARD_MINIMUM}"
     end
 
-    it "is in use" do
-      subject.top_up(10)
-      subject.touch_in(station)
-      expect(subject.in_journey?).to eq(true)
-    end
-
-    it "checks if user can touch out" do
-      subject.top_up(10)
-      subject.touch_in(station)
-      expect(subject).to respond_to(:touch_out)
-    end
-
-    it "checks if user has touched out" do
-      subject.top_up(10)
-      subject.touch_in(station)
-      subject.touch_out(station)
-      expect(subject.in_journey?).to eq(false)
-    end
+    # it "checks if user has touched out" do
+    #   subject.top_up(10)
+    #   subject.touch_in(station)
+    #   subject.touch_out(station)
+    #   expect(subject.in_journey?).to eq(false)
+    # end
 
 
 
@@ -81,21 +69,21 @@ describe Oystercard do
     end
     
   
-    it "stores the exit station" do 
-      subject.top_up(10)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
-    end
+    # it "stores the exit station" do 
+    #   subject.top_up(10)
+    #   subject.touch_in(entry_station)
+    #   subject.touch_out(exit_station)
+    #   expect(subject.exit_station).to eq exit_station
+    # end
 
-    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+    # let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
 
-    it "checks if a journey has been created" do
-      subject.top_up(10)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.journey_history).to include journey
-    end
+    # it "checks if a journey has been created" do
+    #   subject.top_up(10)
+    #   subject.touch_in(entry_station)
+    #   subject.touch_out(exit_station)
+    #   expect(subject.journey_history).to include journey
+    # end
   end
 end
 

@@ -16,6 +16,6 @@ class Journey
   end
 
   def in_journey?
-    entry_station && !exit_station
+    @entry_station && !@exit_station
   end
 end
