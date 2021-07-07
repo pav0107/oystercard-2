@@ -28,14 +28,6 @@ describe Oystercard do
     end
   end
 
-  describe "#deduct" do
-    xit "deducts money from a card" do
-      subject.top_up(10)
-      subject.deduct(5)
-      expect(subject.balance).to eq(5)
-    end
-  end
-
   describe "if in use" do
     let(:station) { double :station}
     it "checks if user can touch" do
@@ -80,26 +72,29 @@ describe Oystercard do
   end
 
   describe "saving journey info" do
-    let(:station1) { double :station1}
-    let(:station2) { double :station2}
+    let(:entry_station) { double :station}
+    let(:exit_station) { double :station}
     it 'stores the entry station' do
       subject.top_up(10)
-      subject.touch_in(station1)
-      expect(subject.entry_station).to eq station1
+      subject.touch_in(entry_station)
+      expect(subject.entry_station).to eq entry_station
     end
     
+  
     it "stores the exit station" do 
       subject.top_up(10)
-      subject.touch_in(station1)
-      subject.touch_out(station2)
-      expect(subject.exit_station).to eq station2
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.exit_station).to eq exit_station
     end
+
+    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
 
     it "checks if a journey has been created" do
       subject.top_up(10)
-      subject.touch_in(station1)
-      subject.touch_out(station2)
-      expect(subject.journey_history).to eq([{entry_station: station1, exit_station: station2}])
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.journey_history).to include journey
     end
   end
 end
