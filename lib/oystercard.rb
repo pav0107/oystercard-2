@@ -27,6 +27,8 @@ class Oystercard
     deduct(1)
     @current_journey.finish(station)
     journey_history << { entry_station: @current_journey.entry_station, exit_station: @current_journey.exit_station}
+    
+    @current_journey = nil if @current_journey.complete?
   end
 
   private
