@@ -1,8 +1,8 @@
 require 'journey'
 
 describe Journey do
-  let(:entry_station) { double :entry_station, zone: 1}
-  let(:exit_station) { double :exit_station, zone: 2}
+  let(:entry_station) { double(entry_station: "Brixton", zone: 2)}
+  let(:exit_station) { double(exit_station: "Victoria", zone: 1)}
 
   describe 'station record' do
     it 'responds to start journey' do
